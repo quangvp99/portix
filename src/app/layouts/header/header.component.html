@@ -1,0 +1,81 @@
+<header class="header">
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input 
+      type="text" 
+      placeholder="Search stocks, portfolios..." 
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="onSearch()"
+      class="search-input"
+    />
+    <button (click)="onSearch()" class="search-btn">🔍</button>
+  </div>
+
+  <!-- Right Actions -->
+  <div class="header-actions">
+    <!-- Theme Toggle -->
+    <button 
+      (click)="toggleTheme()" 
+      class="action-btn theme-btn"
+      [title]="isDarkMode ? 'Light mode' : 'Dark mode'"
+    >
+      <span *ngIf="isDarkMode">☀️</span>
+      <span *ngIf="!isDarkMode">🌙</span>
+    </button>
+
+    <!-- Notifications -->
+    <div class="notification-dropdown">
+      <button 
+        (click)="toggleNotifications()" 
+        class="action-btn notification-btn"
+        title="Notifications"
+      >
+        🔔
+        <span class="badge">3</span>
+      </button>
+      <div *ngIf="showNotifications" class="dropdown-menu">
+        <div class="notification-item">
+          <p class="title">Portfolio Updated</p>
+          <p class="time">2 minutes ago</p>
+        </div>
+        <div class="notification-item">
+          <p class="title">Stock Alert: AAPL</p>
+          <p class="time">1 hour ago</p>
+        </div>
+        <div class="notification-item">
+          <p class="title">Transaction Completed</p>
+          <p class="time">3 hours ago</p>
+        </div>
+        <a href="#" class="view-all">View All Notifications →</a>
+      </div>
+    </div>
+
+    <!-- User Menu -->
+    <div class="user-dropdown">
+      <button 
+        (click)="toggleUserMenu()" 
+        class="user-btn"
+        *ngIf="currentUser"
+      >
+        <div class="avatar">👤</div>
+        <span class="name">{{ currentUser.fullName }}</span>
+        <span class="chevron">▼</span>
+      </button>
+      <div *ngIf="showUserMenu" class="dropdown-menu user-menu">
+        <a routerLink="/profile" class="menu-item">
+          <span class="icon">👤</span>
+          <span>Profile</span>
+        </a>
+        <a routerLink="/settings" class="menu-item">
+          <span class="icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+        <div class="divider"></div>
+        <button (click)="logout()" class="menu-item logout">
+          <span class="icon">🚪</span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

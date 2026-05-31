@@ -1,0 +1,44 @@
+<aside [class.sidebar]="true" [class.collapsed]="!isOpen">
+  <!-- Logo -->
+  <div class="logo-section">
+    <div class="logo">
+      <span class="icon">📈</span>
+      <span *ngIf="isOpen" class="text">Portfolio Track</span>
+    </div>
+    <button (click)="toggleSidebar()" class="toggle-btn">
+      <span *ngIf="isOpen">«</span>
+      <span *ngIf="!isOpen">»</span>
+    </button>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav-menu">
+    <a 
+      *ngFor="let item of navItems"
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: false }"
+      class="nav-item"
+      [title]="!isOpen ? item.label : ''"
+    >
+      <span class="icon">{{ item.icon }}</span>
+      <span *ngIf="isOpen" class="label">{{ item.label }}</span>
+      <span *ngIf="item.badge && isOpen" class="badge">{{ item.badge }}</span>
+    </a>
+  </nav>
+
+  <!-- User Section -->
+  <div class="user-section">
+    <div class="user-profile">
+      <div class="avatar">👤</div>
+      <div *ngIf="isOpen" class="user-info">
+        <p class="name">User Name</p>
+        <p class="email">user@example.com</p>
+      </div>
+    </div>
+    <div *ngIf="isOpen" class="user-actions">
+      <a routerLink="/profile" class="action-btn" title="Profile">⚙️</a>
+      <button (click)="logout()" class="action-btn logout-btn" title="Logout">🚪</button>
+    </div>
+  </div>
+</aside>

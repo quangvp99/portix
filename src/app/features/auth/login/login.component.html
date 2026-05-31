@@ -1,0 +1,116 @@
+<div class="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+  <div class="w-full max-w-md">
+    <!-- Logo/Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-white mb-2">Portfolio Track</h1>
+      <p class="text-blue-200">Professional Stock Portfolio Management</p>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-dark-card border border-dark-border rounded-2xl p-8 shadow-xl">
+      <h2 class="text-2xl font-bold text-white mb-6">Welcome Back</h2>
+
+      <!-- Error Message -->
+      <div *ngIf="error" class="mb-4 p-3 bg-danger-light border border-danger rounded-lg text-danger text-sm">
+        {{ error }}
+      </div>
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <!-- Email Input -->
+        <div>
+          <label class="block text-sm font-medium text-gray-200 mb-2">Email Address</label>
+          <input 
+            type="email" 
+            formControlName="email"
+            placeholder="name@company.com"
+            class="w-full px-4 py-3 bg-slate-800 border border-dark-border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-10 transition"
+            [class.border-danger]="emailControl?.invalid && emailControl?.touched"
+          />
+          <p *ngIf="emailControl?.invalid && emailControl?.touched" class="mt-1 text-xs text-danger">
+            Please enter a valid email address
+          </p>
+        </div>
+
+        <!-- Password Input -->
+        <div>
+          <label class="block text-sm font-medium text-gray-200 mb-2">Password</label>
+          <div class="relative">
+            <input 
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="••••••••"
+              class="w-full px-4 py-3 bg-slate-800 border border-dark-border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-10 transition"
+              [class.border-danger]="passwordControl?.invalid && passwordControl?.touched"
+            />
+            <button 
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition"
+            >
+              <span *ngIf="!showPassword" class="text-lg">👁️</span>
+              <span *ngIf="showPassword" class="text-lg">🙈</span>
+            </button>
+          </div>
+          <p *ngIf="passwordControl?.invalid && passwordControl?.touched" class="mt-1 text-xs text-danger">
+            Password must be at least 6 characters
+          </p>
+        </div>
+
+        <!-- Remember Me & Forgot Password -->
+        <div class="flex items-center justify-between">
+          <label class="flex items-center cursor-pointer">
+            <input 
+              type="checkbox" 
+              formControlName="rememberMe"
+              class="w-4 h-4 rounded border-dark-border bg-slate-800 text-primary focus:ring-primary cursor-pointer"
+            />
+            <span class="ml-2 text-sm text-gray-300">Remember me</span>
+          </label>
+          <a routerLink="/auth/forgot-password" class="text-sm text-primary hover:text-primary-dark transition">
+            Forgot password?
+          </a>
+        </div>
+
+        <!-- Login Button -->
+        <button 
+          type="submit"
+          [disabled]="!loginForm.valid || loading"
+          class="w-full bg-primary hover:bg-primary-dark disabled:bg-gray-600 text-white font-semibold py-3 rounded-lg transition duration-200 flex items-center justify-center"
+        >
+          <app-loading-spinner *ngIf="loading" class="mr-2"></app-loading-spinner>
+          {{ loading ? 'Logging in...' : 'Log In' }}
+        </button>
+      </form>
+
+      <!-- Social Login -->
+      <div class="mt-6">
+        <div class="relative mb-6">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-dark-border"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-dark-card text-gray-400">Or continue with</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <button type="button" class="flex items-center justify-center px-4 py-2 border border-dark-border rounded-lg text-gray-300 hover:bg-slate-700 transition">
+            <span class="text-xl mr-2">f</span> Facebook
+          </button>
+          <button type="button" class="flex items-center justify-center px-4 py-2 border border-dark-border rounded-lg text-gray-300 hover:bg-slate-700 transition">
+            <span class="text-xl mr-2">G</span> Google
+          </button>
+        </div>
+      </div>
+
+      <!-- Register Link -->
+      <p class="mt-6 text-center text-gray-400 text-sm">
+        Don't have an account?
+        <a routerLink="/auth/register" class="text-primary font-semibold hover:text-primary-dark transition">
+          Create one
+        </a>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+  <div class="w-full max-w-md">
+    <!-- Logo/Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-white mb-2">Portfolio Track</h1>
+      <p class="text-blue-200">Professional Stock Portfolio Management</p>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-dark-card border border-dark-border rounded-2xl p-8 shadow-xl">
+      <h2 class="text-2xl font-bold text-white mb-6">Create Account</h2>
+
+      <!-- Error Message -->
+      <div *ngIf="error" class="mb-4 p-3 bg-danger-light border border-danger rounded-lg text-danger text-sm">
+        {{ error }}
+      </div>
+
+      <!-- Registration Form -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <!-- Full Name Input -->
+        <div>
+          <label class="block text-sm font-medium text-gray-200 mb-2">Full Name</label>
+          <input 
+            type="text" 
+            formControlName="fullName"
+            placeholder="John Doe"
+            class="w-full px-4 py-3 bg-slate-800 border border-dark-border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-10 transition"
+            [class.border-danger]="fullNameControl?.invalid && fullNameControl?.touched"
+          />
+          <p *ngIf="fullNameControl?.invalid && fullNameControl?.touched" class="mt-1 text-xs text-danger">
+            Name must be at least 2 characters
+          </p>
+        </div>
+
+        <!-- Email Input -->
+        <div>
+          <label class="block text-sm font-medium text-gray-200 mb-2">Email Address</label>
+          <input 
+            type="email" 
+            formControlName="email"
+            placeholder="name@company.com"
+            class="w-full px-4 py-3 bg-slate-800 border border-dark-border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-10 transition"
+            [class.border-danger]="emailControl?.invalid && emailControl?.touched"
+          />
+          <p *ngIf="emailControl?.invalid && emailControl?.touched" class="mt-1 text-xs text-danger">
+            Please enter a valid email address
+          </p>
+        </div>
+
+        <!-- Password Input -->
+        <div>
+          <label class="block text-sm font-medium text-gray-200 mb-2">Password</label>
+          <div class="relative">
+            <input 
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="••••••••"
+              class="w-full px-4 py-3 bg-slate-800 border border-dark-border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-10 transition"
+              [class.border-danger]="passwordControl?.invalid && passwordControl?.touched"
+            />
+            <button 
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition"
+            >
+              <span *ngIf="!showPassword" class="text-lg">👁️</span>
+              <span *ngIf="showPassword" class="text-lg">🙈</span>
+            </button>
+          </div>
+          <p *ngIf="passwordControl?.invalid && passwordControl?.touched" class="mt-1 text-xs text-danger">
+            Password must be at least 6 characters
+          </p>
+        </div>
+
+        <!-- Confirm Password Input -->
+        <div>
+          <label class="block text-sm font-medium text-gray-200 mb-2">Confirm Password</label>
+          <div class="relative">
+            <input 
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              formControlName="confirmPassword"
+              placeholder="••••••••"
+              class="w-full px-4 py-3 bg-slate-800 border border-dark-border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-10 transition"
+              [class.border-danger]="confirmPasswordControl?.invalid && confirmPasswordControl?.touched"
+            />
+            <button 
+              type="button"
+              (click)="toggleConfirmPasswordVisibility()"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition"
+            >
+              <span *ngIf="!showConfirmPassword" class="text-lg">👁️</span>
+              <span *ngIf="showConfirmPassword" class="text-lg">🙈</span>
+            </button>
+          </div>
+          <p *ngIf="registerForm.hasError('passwordMismatch') && confirmPasswordControl?.touched" class="mt-1 text-xs text-danger">
+            Passwords do not match
+          </p>
+        </div>
+
+        <!-- Register Button -->
+        <button 
+          type="submit"
+          [disabled]="!registerForm.valid || loading"
+          class="w-full bg-primary hover:bg-primary-dark disabled:bg-gray-600 text-white font-semibold py-3 rounded-lg transition duration-200 flex items-center justify-center"
+        >
+          <app-loading-spinner *ngIf="loading" class="mr-2"></app-loading-spinner>
+          {{ loading ? 'Creating Account...' : 'Create Account' }}
+        </button>
+      </form>
+
+      <!-- Login Link -->
+      <p class="mt-6 text-center text-gray-400 text-sm">
+        Already have an account?
+        <a routerLink="/auth/login" class="text-primary font-semibold hover:text-primary-dark transition">
+          Log in
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
