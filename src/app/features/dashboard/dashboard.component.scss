@@ -1,28 +1,166 @@
-.dashboard-container {
-  padding: 2rem;
-  max-width: 100%;
+// Page Container
+.page-container {
+  max-width: 1600px;
   margin: 0 auto;
-  transition: all 0.3s ease;
+  padding: 24px;
+  min-height: 100%;
 }
 
-.dashboard-header {
+// Breadcrumb
+.breadcrumb {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
 
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0;
-    color: var(--color-text);
+  .breadcrumb-item {
+    color: #64748B;
+    transition: color 0.15s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: #94A3B8;
+    }
+
+    &.active {
+      color: #F8FAFC;
+      font-weight: 500;
+      cursor: default;
+    }
   }
 
-  p {
-    margin: 0.5rem 0 0;
+  .breadcrumb-separator {
+    color: #475569;
+    font-size: 12px;
+  }
+}
+
+// Page Header
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 24px;
+
+  .header-content {
+    flex: 1;
+    min-width: 0;
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 600;
+      margin: 0 0 8px;
+      color: #F8FAFC;
+      letter-spacing: -0.02em;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: #94A3B8;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+}
+
+// Buttons
+.btn-primary,
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: -0.01em;
+
+  .icon {
+    font-size: 16px;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  background-color: rgba(148, 163, 184, 0.08);
+  color: #94A3B8;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+
+  &:hover {
+    background-color: rgba(148, 163, 184, 0.12);
+    color: #F8FAFC;
+    border-color: rgba(148, 163, 184, 0.2);
+  }
+}
+
+// Light mode buttons
+:host-context(html:not(.dark)) {
+  .btn-secondary {
+    background-color: rgba(15, 23, 42, 0.05);
+    color: #475569;
+    border-color: rgba(15, 23, 42, 0.1);
+
+    &:hover {
+      background-color: rgba(15, 23, 42, 0.08);
+      color: #0F172A;
+      border-color: rgba(15, 23, 42, 0.15);
+    }
+  }
+
+  .breadcrumb-item {
+    color: #64748B;
+
+    &:hover {
+      color: #475569;
+    }
+
+    &.active {
+      color: #0F172A;
+    }
+  }
+
+  .breadcrumb-separator {
     color: #94A3B8;
-    font-size: 14px;
   }
+
+  .page-title {
+    color: #0F172A;
+  }
+
+  .page-subtitle {
+    color: #64748B;
+  }
+}
+
+// Dashboard Content
+.dashboard-content {
+  // Content styles will be added here
 }
 
 .metrics-grid {
@@ -280,49 +418,46 @@
 
 // Responsive Design
 @media (max-width: 1024px) {
-  .charts-row,
-  .gainers-losers-row {
-    grid-template-columns: 1fr;
+  .page-container {
+    padding: 20px;
   }
 
-  .dashboard-header {
+  .page-header {
     flex-direction: column;
     align-items: flex-start;
+
+    .header-actions {
+      width: 100%;
+
+      button {
+        flex: 1;
+      }
+    }
   }
 }
 
 @media (max-width: 768px) {
-  .dashboard-container {
-    padding: 1rem;
+  .page-container {
+    padding: 16px;
   }
 
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .metric-card {
-    padding: 1rem;
-
-    .card-content {
-      .value {
+  .page-header {
+    .header-content {
+      .page-title {
         font-size: 24px;
       }
+
+      .page-subtitle {
+        font-size: 13px;
+      }
     }
-  }
 
-  .dashboard-header {
-    h1 {
-      font-size: 24px;
-    }
-  }
+    .header-actions {
+      flex-direction: column;
 
-  .table-wrapper {
-    font-size: 12px;
-
-    table {
-      thead th,
-      tbody td {
-        padding: 0.75rem 0.5rem;
+      button {
+        width: 100%;
+        justify-content: center;
       }
     }
   }

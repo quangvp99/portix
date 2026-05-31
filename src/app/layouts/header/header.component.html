@@ -1,18 +1,24 @@
 <header class="header">
   <!-- Search Bar -->
   <div class="search-bar">
+    <button class="search-btn">🔍</button>
     <input 
       type="text" 
-      placeholder="Search stocks, portfolios..." 
+      placeholder="Search stocks, portfolios, transactions..." 
       [(ngModel)]="searchQuery"
       (keyup.enter)="onSearch()"
       class="search-input"
     />
-    <button (click)="onSearch()" class="search-btn">🔍</button>
   </div>
 
   <!-- Right Actions -->
   <div class="header-actions">
+    <!-- Market Status -->
+    <div class="market-status">
+      <span class="status-dot"></span>
+      <span class="status-text">MARKET OPEN</span>
+    </div>
+
     <!-- Theme Toggle -->
     <button 
       (click)="toggleTheme()" 
@@ -72,7 +78,7 @@
         </a>
         <div class="divider"></div>
         <button (click)="logout()" class="menu-item logout">
-          <span class="icon">🚪</span>
+          <span class="icon">⎋</span>
           <span>Logout</span>
         </button>
       </div>

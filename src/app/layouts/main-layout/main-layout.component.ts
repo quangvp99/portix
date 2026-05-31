@@ -24,6 +24,11 @@ import { SidebarService } from '@app/core/services/sidebar.service';
     .app-layout {
       display: flex;
       height: 100vh;
+      background-color: #050810;
+    }
+
+    :host-context(html:not(.dark)) .app-layout {
+      background-color: #FFFFFF;
     }
 
     .main-content {
@@ -32,15 +37,15 @@ import { SidebarService } from '@app/core/services/sidebar.service';
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      margin-left: 280px;
-      transition: margin-left 0.3s ease;
+      margin-left: 260px;
+      transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
       &.collapsed {
-        margin-left: 80px;
+        margin-left: 72px;
       }
 
       @media (max-width: 768px) {
-        margin-left: 80px;
+        margin-left: 72px;
       }
     }
 
@@ -48,6 +53,11 @@ import { SidebarService } from '@app/core/services/sidebar.service';
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
+      background-color: #050810;
+    }
+
+    :host-context(html:not(.dark)) .content-wrapper {
+      background-color: #F8FAFC;
     }
   `]
 })
