@@ -20,14 +20,6 @@ export const routes: Routes = [
     // canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'portfolio', loadChildren: () => import('@app/features/portfolio/portfolio.routes').then(m => m.PORTFOLIO_ROUTES) },
-      { path: 'transactions', loadChildren: () => import('@app/features/transactions/transactions.routes').then(m => m.TRANSACTION_ROUTES) },
-      { path: 'market', loadChildren: () => import('@app/features/market/market.routes').then(m => m.MARKET_ROUTES) },
-      { path: 'watchlist', loadChildren: () => import('@app/features/watchlist/watchlist.routes').then(m => m.WATCHLIST_ROUTES) },
-      { path: 'analytics', loadChildren: () => import('@app/features/analytics/analytics.routes').then(m => m.ANALYTICS_ROUTES) },
-      { path: 'reports', loadChildren: () => import('@app/features/reports/reports.routes').then(m => m.REPORTS_ROUTES) },
-      { path: 'profile', loadChildren: () => import('@app/features/profile/profile.routes').then(m => m.PROFILE_ROUTES) },
-      { path: 'settings', loadChildren: () => import('@app/features/settings/settings.routes').then(m => m.SETTINGS_ROUTES) },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

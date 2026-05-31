@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '@app/core/services/auth.service';
 
 interface NavItem {
@@ -26,12 +24,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   navItems: NavItem[] = [
     { label: 'Dashboard', icon: '📊', route: '/dashboard' },
-    { label: 'Portfolio', icon: '💼', route: '/portfolio' },
-    { label: 'Transactions', icon: '💳', route: '/transactions' },
-    { label: 'Market', icon: '📈', route: '/market' },
-    { label: 'Watchlist', icon: '⭐', route: '/watchlist' },
-    { label: 'Analytics', icon: '📉', route: '/analytics' },
-    { label: 'Reports', icon: '📄', route: '/reports' },
   ];
 
   constructor(
