@@ -48,8 +48,6 @@
               (click)="togglePasswordVisibility()"
               class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition"
             >
-              <span *ngIf="!showPassword" class="text-lg">👁️</span>
-              <span *ngIf="showPassword" class="text-lg">🙈</span>
             </button>
           </div>
           <p *ngIf="passwordControl?.invalid && passwordControl?.touched" class="mt-1 text-xs text-danger">
