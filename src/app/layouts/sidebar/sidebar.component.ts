@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from '@app/core/services/auth.service';
+import { SidebarService } from '@app/core/services/sidebar.service';
 
 interface NavItem {
   label: string;
@@ -19,7 +20,7 @@ interface NavItem {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  isOpen = true;
+  isCollapsed = false;
   private destroy$ = new Subject<void>();
 
   navItems: NavItem[] = [
@@ -28,13 +29,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private sidebarService: SidebarService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sidebarService.isCollapsed$.subscribe(collapsed => {
+      this.isCollapsed = collapsed;
+    });
+  }
 
   toggleSidebar(): void {
-    this.isOpen = !this.isOpen;
+    this.sidebarService.toggle();
   }
 
   logout(): void {

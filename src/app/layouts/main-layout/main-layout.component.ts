@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { HeaderComponent } from '../header/header.component';
+import { SidebarService } from '@app/core/services/sidebar.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -11,7 +12,7 @@ import { HeaderComponent } from '../header/header.component';
   template: `
     <div class="app-layout">
       <app-sidebar></app-sidebar>
-      <div class="main-content">
+      <div class="main-content" [class.collapsed]="isCollapsed">
         <app-header></app-header>
         <div class="content-wrapper">
           <router-outlet></router-outlet>
@@ -27,11 +28,16 @@ import { HeaderComponent } from '../header/header.component';
 
     .main-content {
       flex: 1;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      margin-left: 260px;
+      margin-left: 280px;
       transition: margin-left 0.3s ease;
+
+      &.collapsed {
+        margin-left: 80px;
+      }
 
       @media (max-width: 768px) {
         margin-left: 80px;
@@ -45,4 +51,14 @@ import { HeaderComponent } from '../header/header.component';
     }
   `]
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent implements OnInit {
+  isCollapsed = false;
+
+  constructor(private sidebarService: SidebarService) {}
+
+  ngOnInit(): void {
+    this.sidebarService.isCollapsed$.subscribe(collapsed => {
+      this.isCollapsed = collapsed;
+    });
+  }
+}

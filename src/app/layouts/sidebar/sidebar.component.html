@@ -1,13 +1,13 @@
-<aside [class.sidebar]="true" [class.collapsed]="!isOpen">
+<aside [class.sidebar]="true" [class.collapsed]="isCollapsed">
   <!-- Logo -->
   <div class="logo-section">
     <div class="logo">
       <span class="icon">📈</span>
-      <span *ngIf="isOpen" class="text">Portfolio Track</span>
+      <span *ngIf="!isCollapsed" class="text">Portfolio Track</span>
     </div>
     <button (click)="toggleSidebar()" class="toggle-btn">
-      <span *ngIf="isOpen">«</span>
-      <span *ngIf="!isOpen">»</span>
+      <span *ngIf="!isCollapsed">«</span>
+      <span *ngIf="isCollapsed">»</span>
     </button>
   </div>
 
@@ -19,11 +19,11 @@
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: false }"
       class="nav-item"
-      [title]="!isOpen ? item.label : ''"
+      [title]="isCollapsed ? item.label : ''"
     >
       <span class="icon">{{ item.icon }}</span>
-      <span *ngIf="isOpen" class="label">{{ item.label }}</span>
-      <span *ngIf="item.badge && isOpen" class="badge">{{ item.badge }}</span>
+      <span *ngIf="!isCollapsed" class="label">{{ item.label }}</span>
+      <span *ngIf="item.badge && !isCollapsed" class="badge">{{ item.badge }}</span>
     </a>
   </nav>
 
@@ -31,12 +31,12 @@
   <div class="user-section">
     <div class="user-profile">
       <div class="avatar">👤</div>
-      <div *ngIf="isOpen" class="user-info">
+      <div *ngIf="!isCollapsed" class="user-info">
         <p class="name">User Name</p>
         <p class="email">user&#64;example.com</p>
       </div>
     </div>
-    <div *ngIf="isOpen" class="user-actions">
+    <div *ngIf="!isCollapsed" class="user-actions">
       <a routerLink="/profile" class="action-btn" title="Profile">⚙️</a>
       <button (click)="logout()" class="action-btn logout-btn" title="Logout">🚪</button>
     </div>
